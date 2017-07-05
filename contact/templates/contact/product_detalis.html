@@ -1,0 +1,31 @@
+{% extends 'contact/base.html' %}
+{% block body %}
+{% if request.user == product.user  %}
+<div class="container-fluid ">
+    <!-- Product Info -->
+    <div class="col-sm-4 col-md-3">
+	<div class="panel panel-default">
+	    <div class="panel-body">
+		<a href="{% url 'contact:product_detail' product.id %}">
+		</a>
+		<h1>{{ product.name }} </h1>
+		<h2><p>{{ product.description|linebreaks}}</p></h2>
+	    </div>
+	</div>
+     </div>
+     <div class="col-sm-8 col-md-9">
+	 <ul class="nav nav-pills" style="margin-bottom: 20px;">
+	     <li role="presentation" class="active"><a href="{% url 'contact:product_list' %}">View All</a></li>
+	     <li role="presentation" style="left:10px"><a align="right" class="btn btn-default" href="{% url 'contact:product_edit' product.id %}"  ><span class="glyphicon glyphicon-pencil"></span></a></li>
+	 </ul>
+     </div>
+</div>
+</div>
+{% else  %}
+<h2>
+    <span class="label label-warning">
+	<strong>Warning! </strong>You don't have permission to view this information
+    </span>
+</h2>
+{% endif %}
+{% endblock  %}

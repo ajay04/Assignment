@@ -1,0 +1,179 @@
+{% load staticfiles %}
+<html>
+    <head>
+	<title>Login</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+	 <script src="{% static 'js/login.js' %}"></script>
+	<script src="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
+
+	<style>
+	 body{
+	     background-image: url({% static "order.jpg" %});
+	     background-size: cover;
+	     background-position: top center;
+	     background-repeat: no-repeat;
+	     background-attachment: fixed;
+	 }
+	 p{
+	     color:red;
+	     font-size:small;
+	 }
+	</style>
+
+    </head>
+    <body>
+	<div class="container-fluid">
+	    <div class="row">
+
+		<div class="col-md-3">
+		    <div class="container">
+			<!-- Trigger the modal with a button -->&nbsp;&nbsp;<br>
+			&nbsp;&nbsp;<br>
+			<button type="button" class="btn Login-btn btn-success btn-xl" data-toggle="modal" data-keyboard="true" id="login_b">Login</button>
+			<button type="button" class="btn signup-btn btn-primary btn-xl" data-toggle="modal" id="registration_b" data-keyboard="true">Signup</button></a>
+
+		    <!-- Modal -->
+			<div class="modal fade" id="Registration" role="dialog" tabindex="-1">
+			    <div class="modal-dialog modal-md">
+				<div class="modal-content">
+				    <div class="modal-header">
+					<button type="button" id="close" class="close" data-dismiss="modal">×</button>
+					<center> <b> <h3 class="modal-title">Registration</h3></b> </center>
+				    </div>
+				    <div class="modal-body" style = "background-color:#E0FFFF;">
+					<center>
+					    <div style= "margin-top:1px;">
+						<form style="align:center;" id ="register_form" method="POST" action="">{% csrf_token %}
+						    <table cellspacing = "5" cellpadding = "5">
+							<tr>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td>Username<span style="color:red">*</span></td>
+							    <td><input type="text" id="username" name="username" value="" class="form-control" placeholder="Enter username"></td>
+
+							</tr>
+
+							<tr>
+							    <td></td>
+							    <td><p id="username_error"></p></td>
+							</tr>
+
+							<tr>
+							    <td>
+
+							    </td>
+							</tr>
+							<td>Email<span style="color:red">*</span></td>
+							<td><input type="text" id="email" name="email" value="" class="form-control" placeholder="Enter email address"></td>
+
+							</tr>
+
+							<tr>
+							    <td></td>
+							    <td><p id="email_error"></p></td>
+							</tr>
+							<tr>
+							    <td>
+
+							    </td>
+							</tr>
+							<tr>
+							    <td>Password<span style="color:red">*</span></td>
+							    <td><input type="password" id="password" name="password" value="" class="form-control" placeholder="Enter Password"></td>
+
+							</tr>
+							<tr>
+							    <td>
+
+							    </td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td><p id="password_error"></p></td>
+							</tr>
+							<tr>
+							    <td>Confirm password<span style="color:red">*</span></td>
+							    <td><input type="password" id="confirm_password" name="confirm_password" value="" class="form-control" placeholder="Enter confirm passwrd">
+							    </td>
+
+							</tr>
+							<tr>
+							    <td>
+
+							    </td>
+							</tr>
+
+							<tr>
+							    <td></td>
+							    <td><p id="confirm_password_error"></p></td>
+							</tr>
+
+							<tr>
+							    <td colspan="6" align="center"><input type="button" id="register"  name="register" value="register" class="btn btn-success" ></td>
+							    <td>
+
+							    </td>
+							</tr>
+							<tr>
+							    <td>&nbsp;</td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td> <div id="wait" style="display:none;width:22px;height:22px;border:0px solid black;">
+								Loading..<img src="{% static "demo_wait.gif" %}" width="20" height="20" /></div>
+							    </td>
+							</tr>
+						    </table>
+						    <br><br>
+						    <p id="error" style="color:red;"></p>
+						</form>
+					    </div>
+					</center>
+				    </div>
+				    <div class="modal-footer">
+
+				    </div>
+				</div>
+			    </div>
+			</div>
+
+			<!-- Login Modal -->
+			<div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+			    <div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+				    <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title" style="font-family:'Rock-Salt', cursive;" align="center">Login</h3>
+				    </div>
+				    <div class="modal-body" style="background-color:#E0FFFF;">
+					<form id="login_form" method="post" action="" >{% csrf_token %}
+					    <center>
+						<br>
+						<label>Username:<span style="color:red">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" id="u_name" autofocus="autofocus" class="form-control form-control-inline" name="u_name" placeholder="Enter username"><br><br>
+						<label>Password:<span style="color:red">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="password" id="login_password" class="form-control form-control-inline" name="login_password" placeholder="Enter password"><br><br>
+						<input type="button" id="login" class="btn btn-success btn-md" value="Login" ><br><br>
+						<p id="error_login" style="color:red;"></p>
+					    </center>
+					</form>
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
+	</div>
+    </body>
+</html>
